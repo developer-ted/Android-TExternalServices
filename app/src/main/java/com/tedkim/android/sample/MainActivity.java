@@ -1,4 +1,4 @@
-package com.tedkim.android.texternalservices;
+package com.tedkim.android.sample;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
