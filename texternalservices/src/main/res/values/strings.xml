@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">TExternalServices</string>
+
+    <string name="app_name">CharisSeller</string>
+
+    <!-- API KEY -->
+    <string name="facebook_app_id">994701673911930</string>
+
+    <string name="intent_action">com.tedkim.android.texternalservices</string>
+
 </resources>
