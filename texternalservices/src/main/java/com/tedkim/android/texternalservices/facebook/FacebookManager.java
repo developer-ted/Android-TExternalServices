@@ -43,7 +43,7 @@ public class FacebookManager {
      */
     public void login() {
         Log.d(TAG, "[Facebook Login]");
-        if (mOnServicesListener != null)
+        if (mOnServicesListener == null)
             throw new NullPointerException("You must setListener");
 
         Intent intent = new Intent(mContext, FacebookActivity.class);
@@ -58,7 +58,7 @@ public class FacebookManager {
      */
     public void logout() {
         Log.d(TAG, "[Facebook Logout]");
-        if (mOnServicesListener != null)
+        if (mOnServicesListener == null)
             throw new NullPointerException("You must setListener");
 
         Intent intent = new Intent(mContext, FacebookActivity.class);

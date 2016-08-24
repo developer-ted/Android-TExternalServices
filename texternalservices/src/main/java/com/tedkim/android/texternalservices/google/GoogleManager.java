@@ -44,7 +44,7 @@ public class GoogleManager {
      */
     public void login() {
         Log.d(TAG, "[Google Login]");
-        if (mOnServicesListener != null)
+        if (mOnServicesListener == null)
             throw new NullPointerException("You must setListener");
 
         Intent intent = new Intent(mContext, GoogleActivity.class);
@@ -59,7 +59,7 @@ public class GoogleManager {
      */
     public void logout() {
         Log.d(TAG, "[Google Logout]");
-        if (mOnServicesListener != null)
+        if (mOnServicesListener == null)
             throw new NullPointerException("You must setListener");
 
         Intent intent = new Intent(mContext, GoogleActivity.class);
