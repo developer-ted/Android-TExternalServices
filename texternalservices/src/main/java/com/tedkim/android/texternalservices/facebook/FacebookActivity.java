@@ -10,7 +10,6 @@ import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.tedkim.android.texternalservices.R;
@@ -57,7 +56,6 @@ public class FacebookActivity extends AppCompatActivity {
     }
 
     private void initFacebook() {
-        FacebookSdk.sdkInitialize(this);
         callbackManager = CallbackManager.Factory.create();
 
         switch (mAction) {

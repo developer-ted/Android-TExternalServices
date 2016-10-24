@@ -294,7 +294,7 @@ public class GoogleActivity extends AppCompatActivity {
 
         private String accountName;
 
-        public GetTokenTask(String name) {
+        private GetTokenTask(String name) {
             this.accountName = name;
         }
 

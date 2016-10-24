@@ -24,7 +24,6 @@
             android:authorities="com.facebook.app.FacebookContentProvider994701673911930"
             android:exported="true" />
 
-
         <!--Broadcast-->
         <activity
             android:name=".facebook.FacebookActivity"

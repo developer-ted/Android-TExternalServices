@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.tedkim.android.texternalservices.ServicesManager;
-import com.tedkim.android.texternalservices.interfaces.OnServicesListener;
+import com.tedkim.android.texternalservices.interfaces.OnSnsLoginListener;
 
 /**
  * Created by Ted
@@ -19,7 +19,7 @@ public class GoogleManager {
     private static GoogleManager mInstance;
     private Context mContext;
 
-    private OnServicesListener mOnServicesListener;
+    private OnSnsLoginListener mOnSnsLoginListener;
 
     public static GoogleManager getInstance(Context context) {
         if (mInstance == null)
@@ -29,13 +29,13 @@ public class GoogleManager {
     }
 
     /**
-     * Set OnServicesListener
+     * Set OnSnsLoginListener
      *
-     * @param listener OnServicesListener
+     * @param listener OnSnsLoginListener
      * @return GoogleManager
      */
-    public GoogleManager setListener(OnServicesListener listener) {
-        this.mOnServicesListener = listener;
+    public GoogleManager setListener(OnSnsLoginListener listener) {
+        this.mOnSnsLoginListener = listener;
         return this;
     }
 
@@ -44,7 +44,7 @@ public class GoogleManager {
      */
     public void login() {
         Log.d(TAG, "[Google Login]");
-        if (mOnServicesListener == null)
+        if (mOnSnsLoginListener == null)
             throw new NullPointerException("You must setListener");
 
         Intent intent = new Intent(mContext, GoogleActivity.class);
@@ -59,7 +59,7 @@ public class GoogleManager {
      */
     public void logout() {
         Log.d(TAG, "[Google Logout]");
-        if (mOnServicesListener == null)
+        if (mOnSnsLoginListener == null)
             throw new NullPointerException("You must setListener");
 
         Intent intent = new Intent(mContext, GoogleActivity.class);
@@ -71,26 +71,26 @@ public class GoogleManager {
 
     public void onSuccessLogin(String token) {
         Log.d(TAG, "[onSuccessLogin] token : " + token);
-        mOnServicesListener.onSuccessLogin(ServicesManager.SERVICE_GOOGLE, token);
+        mOnSnsLoginListener.onSuccessLogin(ServicesManager.SERVICE_GOOGLE, token);
     }
 
     public void onFailLogin(String message) {
         Log.d(TAG, "[onFailLogin] message : " + message);
-        mOnServicesListener.onFailLogin(ServicesManager.SERVICE_GOOGLE, message);
+        mOnSnsLoginListener.onFailLogin(ServicesManager.SERVICE_GOOGLE, message);
     }
 
     public void onCancelLogin() {
         Log.d(TAG, "[onCancelLogin]");
-        mOnServicesListener.onCancelLogin(ServicesManager.SERVICE_GOOGLE);
+        mOnSnsLoginListener.onCancelLogin(ServicesManager.SERVICE_GOOGLE);
     }
 
     public void onSuccessLogout() {
         Log.d(TAG, "[onSuccessLogout]");
-        mOnServicesListener.onSuccessLogout(ServicesManager.SERVICE_GOOGLE);
+        mOnSnsLoginListener.onSuccessLogout(ServicesManager.SERVICE_GOOGLE);
     }
 
     public void onFailLogout() {
         Log.d(TAG, "[onFailLogout]");
-        mOnServicesListener.onFailLogout(ServicesManager.SERVICE_GOOGLE);
+        mOnSnsLoginListener.onFailLogout(ServicesManager.SERVICE_GOOGLE);
     }
 }
