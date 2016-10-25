@@ -21,7 +21,6 @@ import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Scope;
 import com.google.android.gms.common.api.Status;
 import com.tedkim.android.texternalservices.R;
-import com.tedkim.android.texternalservices.ServicesManager;
 import com.tedkim.android.texternalservices.broadcast.ServicesBroadcastReceiver;
 
 /**
@@ -183,7 +182,7 @@ public class GoogleActivity extends AppCompatActivity {
     private void successLogin(String token) {
         Intent intent = new Intent();
         intent.setAction(getString(R.string.intent_action));
-        intent.putExtra(ServicesManager.SERVICE, ServicesManager.SERVICE_GOOGLE);
+        intent.putExtra(ExternalServiceConfig.SERVICE, ExternalServiceConfig.SERVICE_GOOGLE);
         intent.putExtra(ServicesBroadcastReceiver.ACTION_TYPE, ServicesBroadcastReceiver.LOGIN_SUCCESS);
         intent.putExtra(ServicesBroadcastReceiver.ACCESS_TOKEN, token);
 
@@ -196,7 +195,7 @@ public class GoogleActivity extends AppCompatActivity {
     private void cancelLogin() {
         Intent intent = new Intent();
         intent.setAction(getString(R.string.intent_action));
-        intent.putExtra(ServicesManager.SERVICE, ServicesManager.SERVICE_GOOGLE);
+        intent.putExtra(ExternalServiceConfig.SERVICE, ExternalServiceConfig.SERVICE_GOOGLE);
         intent.putExtra(ServicesBroadcastReceiver.ACTION_TYPE, ServicesBroadcastReceiver.LOGIN_CANCEL);
 
         destroyActivity(intent);
@@ -210,7 +209,7 @@ public class GoogleActivity extends AppCompatActivity {
     private void failLogin(String message) {
         Intent intent = new Intent();
         intent.setAction(getString(R.string.intent_action));
-        intent.putExtra(ServicesManager.SERVICE, ServicesManager.SERVICE_GOOGLE);
+        intent.putExtra(ExternalServiceConfig.SERVICE, ExternalServiceConfig.SERVICE_GOOGLE);
         intent.putExtra(ServicesBroadcastReceiver.ACTION_TYPE, ServicesBroadcastReceiver.LOGIN_FAIL);
         intent.putExtra(ServicesBroadcastReceiver.ERROR_MESSAGE, message);
 
@@ -223,7 +222,7 @@ public class GoogleActivity extends AppCompatActivity {
     private void successLogout() {
         Intent intent = new Intent();
         intent.setAction(getString(R.string.intent_action));
-        intent.putExtra(ServicesManager.SERVICE, ServicesManager.SERVICE_GOOGLE);
+        intent.putExtra(ExternalServiceConfig.SERVICE, ExternalServiceConfig.SERVICE_GOOGLE);
         intent.putExtra(ServicesBroadcastReceiver.ACTION_TYPE, ServicesBroadcastReceiver.LOGOUT_SUCCESS);
 
         destroyActivity(intent);
@@ -235,7 +234,7 @@ public class GoogleActivity extends AppCompatActivity {
     private void failLogout() {
         Intent intent = new Intent();
         intent.setAction(getString(R.string.intent_action));
-        intent.putExtra(ServicesManager.SERVICE, ServicesManager.SERVICE_GOOGLE);
+        intent.putExtra(ExternalServiceConfig.SERVICE, ExternalServiceConfig.SERVICE_GOOGLE);
         intent.putExtra(ServicesBroadcastReceiver.ACTION_TYPE, ServicesBroadcastReceiver.LOGOUT_FAIL);
 
         destroyActivity(intent);

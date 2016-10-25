@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import com.tedkim.android.texternalservices.ServicesManager;
 import com.tedkim.android.texternalservices.interfaces.OnSnsLoginListener;
 
 /**
@@ -71,26 +70,26 @@ public class GoogleManager {
 
     public void onSuccessLogin(String token) {
         Log.d(TAG, "[onSuccessLogin] token : " + token);
-        mOnSnsLoginListener.onSuccessLogin(ServicesManager.SERVICE_GOOGLE, token);
+        mOnSnsLoginListener.onSuccessLogin(ExternalServiceConfig.SERVICE_GOOGLE, token);
     }
 
     public void onFailLogin(String message) {
         Log.d(TAG, "[onFailLogin] message : " + message);
-        mOnSnsLoginListener.onFailLogin(ServicesManager.SERVICE_GOOGLE, message);
+        mOnSnsLoginListener.onFailLogin(ExternalServiceConfig.SERVICE_GOOGLE, message);
     }
 
     public void onCancelLogin() {
         Log.d(TAG, "[onCancelLogin]");
-        mOnSnsLoginListener.onCancelLogin(ServicesManager.SERVICE_GOOGLE);
+        mOnSnsLoginListener.onCancelLogin(ExternalServiceConfig.SERVICE_GOOGLE);
     }
 
     public void onSuccessLogout() {
         Log.d(TAG, "[onSuccessLogout]");
-        mOnSnsLoginListener.onSuccessLogout(ServicesManager.SERVICE_GOOGLE);
+        mOnSnsLoginListener.onSuccessLogout(ExternalServiceConfig.SERVICE_GOOGLE);
     }
 
     public void onFailLogout() {
         Log.d(TAG, "[onFailLogout]");
-        mOnSnsLoginListener.onFailLogout(ServicesManager.SERVICE_GOOGLE);
+        mOnSnsLoginListener.onFailLogout(ExternalServiceConfig.SERVICE_GOOGLE);
     }
 }

@@ -11,8 +11,6 @@ import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.model.SharePhoto;
 import com.facebook.share.model.SharePhotoContent;
 import com.facebook.share.widget.ShareDialog;
-import com.tedkim.android.texternalservices.ServicesManager;
-import com.tedkim.android.texternalservices.config.ExternalServiceConfig;
 import com.tedkim.android.texternalservices.interfaces.OnSnsLoginListener;
 import com.tedkim.android.texternalservices.utils.ExternalServiceUtils;
 
@@ -87,28 +85,27 @@ public class FacebookManager {
     // =============================================================================
     public void onSuccessLogin(String token) {
         Log.d(TAG, "[onSuccessLogin] token : " + token);
-        mOnSnsLoginListener.onSuccessLogin(ServicesManager.SERVICE_FACEBOOK, token);
+        mOnSnsLoginListener.onSuccessLogin(ExternalServiceConfig.SERVICE_FACEBOOK, token);
     }
 
     public void onFailLogin(String message) {
         Log.d(TAG, "[onFailLogin] message : " + message);
-        mOnSnsLoginListener.onFailLogin(ServicesManager.SERVICE_FACEBOOK, message);
+        mOnSnsLoginListener.onFailLogin(ExternalServiceConfig.SERVICE_FACEBOOK, message);
     }
 
     public void onCancelLogin() {
         Log.d(TAG, "[onCancelLogin]");
-        mOnSnsLoginListener.onCancelLogin(ServicesManager.SERVICE_FACEBOOK);
+        mOnSnsLoginListener.onCancelLogin(ExternalServiceConfig.SERVICE_FACEBOOK);
     }
 
     public void onSuccessLogout() {
         Log.d(TAG, "[onSuccessLogout]");
-        mOnSnsLoginListener.onSuccessLogout(ServicesManager.SERVICE_FACEBOOK);
+        mOnSnsLoginListener.onSuccessLogout(ExternalServiceConfig.SERVICE_FACEBOOK);
     }
 
     // =============================================================================
-    // Set share option
+    // Share url
     // =============================================================================
-
     /**
      * Facebook share url
      *
@@ -127,6 +124,9 @@ public class FacebookManager {
         ShareDialog.show(activity, content);
     }
 
+    // =============================================================================
+    // Share photo
+    // =============================================================================
     /**
      * Facebook share photo using bitmap image
      *
@@ -145,6 +145,9 @@ public class FacebookManager {
         }
     }
 
+    // =============================================================================
+    // Share video
+    // =============================================================================
     /**
      * FIXME not installed check
      * Facebook share video using video path
@@ -158,7 +161,7 @@ public class FacebookManager {
             Uri uri = Uri.fromFile(media);
 
             Intent mIntent = new Intent(Intent.ACTION_SEND);
-            mIntent.setType(ExternalServiceConfig.INTENT_VIDEO_TYPE);
+            mIntent.setType(com.tedkim.android.texternalservices.config.ExternalServiceConfig.INTENT_VIDEO_TYPE);
             mIntent.putExtra(Intent.EXTRA_STREAM, uri);
             mIntent.setPackage(FACEBOOK_PACKAGE);
             activity.startActivity(mIntent);

@@ -9,7 +9,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import com.tedkim.android.texternalservices.ServicesManager;
 import com.tedkim.android.texternalservices.facebook.FacebookManager;
 import com.tedkim.android.texternalservices.google.GoogleManager;
 
@@ -30,12 +29,12 @@ public class ServicesBroadcastReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        switch (intent.getStringExtra(ServicesManager.SERVICE)) {
-            case ServicesManager.SERVICE_FACEBOOK:
+        switch (intent.getStringExtra(ExternalServiceConfig.SERVICE)) {
+            case ExternalServiceConfig.SERVICE_FACEBOOK:
                 onReceiveFacebook(context, intent);
                 break;
 
-            case ServicesManager.SERVICE_GOOGLE:
+            case ExternalServiceConfig.SERVICE_GOOGLE:
                 onReceiveGoogle(context, intent);
                 break;
         }

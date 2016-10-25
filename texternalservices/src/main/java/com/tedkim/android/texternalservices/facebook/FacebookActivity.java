@@ -13,8 +13,8 @@ import com.facebook.FacebookException;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.tedkim.android.texternalservices.R;
-import com.tedkim.android.texternalservices.ServicesManager;
 import com.tedkim.android.texternalservices.broadcast.ServicesBroadcastReceiver;
+import com.tedkim.android.texternalservices.config.ExternalServiceConfig;
 
 import java.util.Arrays;
 import java.util.Set;
@@ -156,7 +156,7 @@ public class FacebookActivity extends AppCompatActivity {
     private void successLogin(String token) {
         Intent intent = new Intent();
         intent.setAction(getString(R.string.intent_action));
-        intent.putExtra(ServicesManager.SERVICE, ServicesManager.SERVICE_FACEBOOK);
+        intent.putExtra(ExternalServiceConfig.SERVICE, ExternalServiceConfig.SERVICE_FACEBOOK);
         intent.putExtra(ServicesBroadcastReceiver.ACTION_TYPE, ServicesBroadcastReceiver.LOGIN_SUCCESS);
         intent.putExtra(ServicesBroadcastReceiver.ACCESS_TOKEN, token);
 
@@ -169,7 +169,7 @@ public class FacebookActivity extends AppCompatActivity {
     private void cancelLogin() {
         Intent intent = new Intent();
         intent.setAction(getString(R.string.intent_action));
-        intent.putExtra(ServicesManager.SERVICE, ServicesManager.SERVICE_FACEBOOK);
+        intent.putExtra(ExternalServiceConfig.SERVICE, ExternalServiceConfig.SERVICE_FACEBOOK);
         intent.putExtra(ServicesBroadcastReceiver.ACTION_TYPE, ServicesBroadcastReceiver.LOGIN_CANCEL);
 
         destroyActivity(intent);
@@ -183,7 +183,7 @@ public class FacebookActivity extends AppCompatActivity {
     private void failLogin(String message) {
         Intent intent = new Intent();
         intent.setAction(getString(R.string.intent_action));
-        intent.putExtra(ServicesManager.SERVICE, ServicesManager.SERVICE_FACEBOOK);
+        intent.putExtra(ExternalServiceConfig.SERVICE, ExternalServiceConfig.SERVICE_FACEBOOK);
         intent.putExtra(ServicesBroadcastReceiver.ACTION_TYPE, ServicesBroadcastReceiver.LOGIN_FAIL);
         intent.putExtra(ServicesBroadcastReceiver.ERROR_MESSAGE, message);
 
@@ -196,7 +196,7 @@ public class FacebookActivity extends AppCompatActivity {
     private void successLogout() {
         Intent intent = new Intent();
         intent.setAction(getString(R.string.intent_action));
-        intent.putExtra(ServicesManager.SERVICE, ServicesManager.SERVICE_FACEBOOK);
+        intent.putExtra(ExternalServiceConfig.SERVICE, ExternalServiceConfig.SERVICE_FACEBOOK);
         intent.putExtra(ServicesBroadcastReceiver.ACTION_TYPE, ServicesBroadcastReceiver.LOGOUT_SUCCESS);
 
         destroyActivity(intent);
