@@ -22,6 +22,7 @@ import com.google.android.gms.common.api.Scope;
 import com.google.android.gms.common.api.Status;
 import com.tedkim.android.texternalservices.R;
 import com.tedkim.android.texternalservices.broadcast.ServicesBroadcastReceiver;
+import com.tedkim.android.texternalservices.config.ExternalServiceConfig;
 
 /**
  * Created by Ted

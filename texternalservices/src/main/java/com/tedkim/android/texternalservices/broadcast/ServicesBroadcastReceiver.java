@@ -9,6 +9,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
+import com.tedkim.android.texternalservices.config.ExternalServiceConfig;
 import com.tedkim.android.texternalservices.facebook.FacebookManager;
 import com.tedkim.android.texternalservices.google.GoogleManager;
 

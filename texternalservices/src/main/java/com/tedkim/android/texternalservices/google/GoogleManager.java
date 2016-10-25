@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
+import com.tedkim.android.texternalservices.config.ExternalServiceConfig;
 import com.tedkim.android.texternalservices.interfaces.OnSnsLoginListener;
 
 /**
