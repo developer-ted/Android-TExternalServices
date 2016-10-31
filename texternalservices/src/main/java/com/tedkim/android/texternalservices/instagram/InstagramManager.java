@@ -17,17 +17,6 @@ import java.io.File;
 public class InstagramManager {
 
     private static final String INSTAGRAM_PACKAGE = "com.instagram.android";
-    private static InstagramManager mInstance;
-
-    private Activity mActivity;
-    private Intent mIntent;
-
-    public static InstagramManager getInstance(Activity activity) {
-        if (mInstance == null)
-            mInstance = new InstagramManager();
-        mInstance.mActivity = activity;
-        return mInstance;
-    }
 
     // =============================================================================
     // Photo share
@@ -37,15 +26,15 @@ public class InstagramManager {
      *
      * @param photoPath photo path
      */
-    public void sharePhoto(String photoPath) {
+    public void sharePhoto(Activity activity, String photoPath) {
         File media = new File(photoPath);
         Uri uri = Uri.fromFile(media);
 
-        mIntent = new Intent(Intent.ACTION_SEND);
-        mIntent.setType(ExternalServiceConfig.INTENT_IMAGE_TYPE);
-        mIntent.putExtra(Intent.EXTRA_STREAM, uri);
-        mIntent.setPackage(INSTAGRAM_PACKAGE);
-        share();
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType(ExternalServiceConfig.INTENT_IMAGE_TYPE);
+        intent.putExtra(Intent.EXTRA_STREAM, uri);
+        intent.setPackage(INSTAGRAM_PACKAGE);
+        share(activity, intent);
     }
 
     /**
@@ -53,14 +42,14 @@ public class InstagramManager {
      *
      * @param file photo file
      */
-    public void sharePhoto(File file) {
+    public void sharePhoto(Activity activity, File file) {
         Uri uri = Uri.fromFile(file);
 
-        mIntent = new Intent(Intent.ACTION_SEND);
-        mIntent.setType(ExternalServiceConfig.INTENT_IMAGE_TYPE);
-        mIntent.putExtra(Intent.EXTRA_STREAM, uri);
-        mIntent.setPackage(INSTAGRAM_PACKAGE);
-        share();
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType(ExternalServiceConfig.INTENT_IMAGE_TYPE);
+        intent.putExtra(Intent.EXTRA_STREAM, uri);
+        intent.setPackage(INSTAGRAM_PACKAGE);
+        share(activity, intent);
     }
 
     /**
@@ -68,12 +57,12 @@ public class InstagramManager {
      *
      * @param uri photo uri
      */
-    public void sharePhoto(Uri uri) {
-        mIntent = new Intent(Intent.ACTION_SEND);
-        mIntent.setType(ExternalServiceConfig.INTENT_IMAGE_TYPE);
-        mIntent.putExtra(Intent.EXTRA_STREAM, uri);
-        mIntent.setPackage(INSTAGRAM_PACKAGE);
-        share();
+    public void sharePhoto(Activity activity, Uri uri) {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType(ExternalServiceConfig.INTENT_IMAGE_TYPE);
+        intent.putExtra(Intent.EXTRA_STREAM, uri);
+        intent.setPackage(INSTAGRAM_PACKAGE);
+        share(activity, intent);
     }
 
     // =============================================================================
@@ -84,15 +73,15 @@ public class InstagramManager {
      *
      * @param videoPath video path
      */
-    public void shareVideo(String videoPath) {
+    public void shareVideo(Activity activity, String videoPath) {
         File media = new File(videoPath);
         Uri uri = Uri.fromFile(media);
 
-        mIntent = new Intent(Intent.ACTION_SEND);
-        mIntent.setType(ExternalServiceConfig.INTENT_VIDEO_TYPE);
-        mIntent.putExtra(Intent.EXTRA_STREAM, uri);
-        mIntent.setPackage(INSTAGRAM_PACKAGE);
-        share();
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType(ExternalServiceConfig.INTENT_VIDEO_TYPE);
+        intent.putExtra(Intent.EXTRA_STREAM, uri);
+        intent.setPackage(INSTAGRAM_PACKAGE);
+        share(activity, intent);
     }
 
     /**
@@ -100,14 +89,14 @@ public class InstagramManager {
      *
      * @param file video file
      */
-    public void shareVideo(File file) {
+    public void shareVideo(Activity activity, File file) {
         Uri uri = Uri.fromFile(file);
 
-        mIntent = new Intent(Intent.ACTION_SEND);
-        mIntent.setType(ExternalServiceConfig.INTENT_VIDEO_TYPE);
-        mIntent.putExtra(Intent.EXTRA_STREAM, uri);
-        mIntent.setPackage(INSTAGRAM_PACKAGE);
-        share();
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType(ExternalServiceConfig.INTENT_VIDEO_TYPE);
+        intent.putExtra(Intent.EXTRA_STREAM, uri);
+        intent.setPackage(INSTAGRAM_PACKAGE);
+        share(activity, intent);
     }
 
     /**
@@ -115,12 +104,12 @@ public class InstagramManager {
      *
      * @param uri video uri
      */
-    public void shareVideo(Uri uri) {
-        mIntent = new Intent(Intent.ACTION_SEND);
-        mIntent.setType(ExternalServiceConfig.INTENT_VIDEO_TYPE);
-        mIntent.putExtra(Intent.EXTRA_STREAM, uri);
-        mIntent.setPackage(INSTAGRAM_PACKAGE);
-        share();
+    public void shareVideo(Activity activity, Uri uri) {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType(ExternalServiceConfig.INTENT_VIDEO_TYPE);
+        intent.putExtra(Intent.EXTRA_STREAM, uri);
+        intent.setPackage(INSTAGRAM_PACKAGE);
+        share(activity, intent);
     }
 
     // =============================================================================
@@ -130,9 +119,9 @@ public class InstagramManager {
      * FIXME not installed check
      * Instagram share
      */
-    private void share() {
-        if (ExternalServiceUtils.checkInstalled(mActivity, INSTAGRAM_PACKAGE))
-            mActivity.startActivity(mIntent);
+    private void share(Activity activity, Intent intent) {
+        if (ExternalServiceUtils.checkInstalled(activity, INSTAGRAM_PACKAGE))
+            activity.startActivity(intent);
     }
 
 

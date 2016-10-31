@@ -105,7 +105,7 @@ public class FacebookManager {
     }
 
     // =============================================================================
-    // Share url
+    // Share Link
     // =============================================================================
     /**
      * Facebook share url
@@ -115,7 +115,7 @@ public class FacebookManager {
      * @param desc     description
      * @param url      share url
      */
-    public void shareUrl(Activity activity, String title, String desc, String url) {
+    public static void shareLink(Activity activity, String title, String desc, String url) {
         ShareLinkContent content = new ShareLinkContent.Builder()
                 .setContentTitle(title)
                 .setContentUrl(Uri.parse(url))
@@ -125,9 +125,30 @@ public class FacebookManager {
         ShareDialog.show(activity, content);
     }
 
+    /**
+     * Facebook share url and image
+     *
+     * @param activity activity
+     * @param imageUrl link image url
+     * @param title    link title
+     * @param desc     link description
+     * @param url      share url
+     */
+    public static void shareLink(Activity activity, String imageUrl, String title, String desc, String url) {
+        ShareLinkContent content = new ShareLinkContent.Builder()
+                .setContentTitle(title)
+                .setContentUrl(Uri.parse(url))
+                .setContentDescription(desc)
+                .setImageUrl(Uri.parse(imageUrl))
+                .build();
+
+        ShareDialog.show(activity, content);
+    }
+
     // =============================================================================
     // Share photo
     // =============================================================================
+
     /**
      * Facebook share photo using bitmap image
      *
@@ -141,6 +162,9 @@ public class FacebookManager {
                     .build();
             SharePhotoContent content = new SharePhotoContent.Builder()
                     .addPhoto(photo)
+//                    .setShareHashtag(new ShareHashtag.Builder()
+//                            .setHashtag("#Charis #HICHARIS")
+//                            .build())
                     .build();
             ShareDialog.show(activity, content);
         }
@@ -149,6 +173,7 @@ public class FacebookManager {
     // =============================================================================
     // Share video
     // =============================================================================
+
     /**
      * FIXME not installed check
      * Facebook share video using video path
@@ -161,11 +186,14 @@ public class FacebookManager {
             File media = new File(videoPath);
             Uri uri = Uri.fromFile(media);
 
-            Intent mIntent = new Intent(Intent.ACTION_SEND);
-            mIntent.setType(com.tedkim.android.texternalservices.config.ExternalServiceConfig.INTENT_VIDEO_TYPE);
-            mIntent.putExtra(Intent.EXTRA_STREAM, uri);
-            mIntent.setPackage(FACEBOOK_PACKAGE);
-            activity.startActivity(mIntent);
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType(ExternalServiceConfig.INTENT_VIDEO_TYPE);
+            intent.putExtra(Intent.EXTRA_STREAM, uri);
+            intent.putExtra(Intent.EXTRA_TITLE, "title");
+            intent.putExtra(Intent.EXTRA_SUBJECT, "subject");
+            intent.putExtra(Intent.EXTRA_TEXT, "text");
+            intent.setPackage(FACEBOOK_PACKAGE);
+            activity.startActivity(intent);
         }
     }
 
