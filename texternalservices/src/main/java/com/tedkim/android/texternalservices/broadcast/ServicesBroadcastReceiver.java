@@ -8,10 +8,13 @@ package com.tedkim.android.texternalservices.broadcast;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 import com.tedkim.android.texternalservices.config.ExternalServiceConfig;
 import com.tedkim.android.texternalservices.facebook.FacebookManager;
 import com.tedkim.android.texternalservices.google.GoogleManager;
+
+import static com.facebook.GraphRequest.TAG;
 
 /**
  * Services broadcast receiver
@@ -64,18 +67,22 @@ public class ServicesBroadcastReceiver extends BroadcastReceiver {
     private void onReceiveGoogle(Context context, Intent intent) {
         switch (intent.getStringExtra(ACTION_TYPE)) {
             case LOGIN_SUCCESS:
+                Log.e(TAG, "onReceiveGoogle: LOGIN_SUCCESS" );
                 GoogleManager.getInstance(context).onSuccessLogin(intent.getStringExtra(ACCESS_TOKEN));
                 break;
 
             case LOGIN_FAIL:
+                Log.e(TAG, "onReceiveGoogle: LOGIN_FAIL" );
                 GoogleManager.getInstance(context).onFailLogin(intent.getStringExtra(ERROR_MESSAGE));
                 break;
 
             case LOGIN_CANCEL:
+                Log.e(TAG, "onReceiveGoogle: LOGIN_CANCEL" );
                 GoogleManager.getInstance(context).onCancelLogin();
                 break;
 
             case LOGOUT_SUCCESS:
+                Log.e(TAG, "onReceiveGoogle: LOGOUT_SUCCESS:" );
                 GoogleManager.getInstance(context).onSuccessLogout();
                 break;
 
