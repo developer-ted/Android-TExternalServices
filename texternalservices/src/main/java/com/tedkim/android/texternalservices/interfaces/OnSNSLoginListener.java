@@ -3,7 +3,7 @@ package com.tedkim.android.texternalservices.interfaces;
 /**
  * Created by Ted
  */
-public class OnSnsLoginListener {
+public class OnSNSLoginListener {
 
     public void onSuccessLogin(String service, String token) {}
     public void onFailLogin(String service, String message) {}
