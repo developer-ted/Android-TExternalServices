@@ -1,4 +1,4 @@
-package com.tedkim.android.texternalservices.instagram;
+package com.tedkim.android.texternalservices.wechat;
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,67 +11,30 @@ import com.tedkim.android.texternalservices.utils.ExternalServiceUtils;
 import java.io.File;
 
 /**
- * Instagram Manger
+ * Wechat Manger
  * Created by Ted
  */
 
-public class InstagramManager {
+public class WeChatManager {
 
-    private static final String INSTAGRAM_URL = "http://www.instagram.com/";
-    private static final String INSTAGRAM_PACKAGE = "com.instagram.android";
+    private static final String WE_CHAT_PACKAGE = "com.tencent.mm";
 
     public static void openApp(Activity activity) {
-        if (ExternalServiceUtils.checkInstalled(activity, INSTAGRAM_PACKAGE)) {
-            Intent intent = new Intent(Intent.ACTION_SEND);
-            intent.setType(ExternalServiceConfig.INTENT_TEXT_TYPE);
-            intent.putExtra(Intent.EXTRA_TEXT, " ");
-            intent.putExtra(Intent.EXTRA_SUBJECT, " ");
-            intent.setPackage(INSTAGRAM_PACKAGE);
-            activity.startActivity(intent);
-
-
-//            Uri uri = Uri.parse("http://instagram.com/");
-//            Intent likeIng = new Intent(Intent.ACTION_VIEW, uri);
-//
-//            likeIng.setPackage("com.instagram.android");
-//
-//            try {
-//                activity.startActivity(likeIng);
-//            } catch (ActivityNotFoundException e) {
-//                activity.startActivity(new Intent(Intent.ACTION_VIEW,
-//                        Uri.parse("http://instagram.com/xxx")));
-//            }
-
-////            Intent intent = new Intent(Intent.ACTION_SEND);
-////            intent.setPackage(INSTAGRAM_PACKAGE);
-////            activity.startActivity(intent);
-//            Intent intent = new Intent(Intent.ACTION_VIEW);
-////            intent.setType(ExternalServiceConfig.INTENT_MAIN);
-////            intent.setPackage(INSTAGRAM_PACKAGE);
-//            intent.setData(Uri.parse("http://www.facebook.com"));
-//            activity.startActivity(intent);
-        } else {
-
-        }
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType(ExternalServiceConfig.INTENT_TEXT_TYPE);
+        intent.putExtra(Intent.EXTRA_TEXT, " ");
+        intent.setPackage(WE_CHAT_PACKAGE);
+        activity.startActivity(intent);
     }
 
     /**
-     * Check instagram app installed
+     * Check wechat app installed
      *
      * @param context context
      * @return installed
      */
     public static boolean checkInstalledApp(Context context) {
-        return ExternalServiceUtils.checkInstalled(context, INSTAGRAM_PACKAGE);
-    }
-
-    /**
-     * Open instagram web site
-     *
-     * @param context context
-     */
-    public static void openWebSite(Context context) {
-        context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(INSTAGRAM_URL)));
+        return ExternalServiceUtils.checkInstalled(context, WE_CHAT_PACKAGE);
     }
 
     // =============================================================================
@@ -89,7 +52,7 @@ public class InstagramManager {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType(ExternalServiceConfig.INTENT_IMAGE_TYPE);
         intent.putExtra(Intent.EXTRA_STREAM, uri);
-        intent.setPackage(INSTAGRAM_PACKAGE);
+        intent.setPackage(WE_CHAT_PACKAGE);
         share(activity, intent);
     }
 
@@ -104,7 +67,7 @@ public class InstagramManager {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType(ExternalServiceConfig.INTENT_IMAGE_TYPE);
         intent.putExtra(Intent.EXTRA_STREAM, uri);
-        intent.setPackage(INSTAGRAM_PACKAGE);
+        intent.setPackage(WE_CHAT_PACKAGE);
         share(activity, intent);
     }
 
@@ -117,7 +80,7 @@ public class InstagramManager {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType(ExternalServiceConfig.INTENT_IMAGE_TYPE);
         intent.putExtra(Intent.EXTRA_STREAM, uri);
-        intent.setPackage(INSTAGRAM_PACKAGE);
+        intent.setPackage(WE_CHAT_PACKAGE);
         share(activity, intent);
     }
 
@@ -136,7 +99,7 @@ public class InstagramManager {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType(ExternalServiceConfig.INTENT_VIDEO_TYPE);
         intent.putExtra(Intent.EXTRA_STREAM, uri);
-        intent.setPackage(INSTAGRAM_PACKAGE);
+        intent.setPackage(WE_CHAT_PACKAGE);
         share(activity, intent);
     }
 
@@ -151,7 +114,7 @@ public class InstagramManager {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType(ExternalServiceConfig.INTENT_VIDEO_TYPE);
         intent.putExtra(Intent.EXTRA_STREAM, uri);
-        intent.setPackage(INSTAGRAM_PACKAGE);
+        intent.setPackage(WE_CHAT_PACKAGE);
         share(activity, intent);
     }
 
@@ -164,7 +127,7 @@ public class InstagramManager {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType(ExternalServiceConfig.INTENT_VIDEO_TYPE);
         intent.putExtra(Intent.EXTRA_STREAM, uri);
-        intent.setPackage(INSTAGRAM_PACKAGE);
+        intent.setPackage(WE_CHAT_PACKAGE);
         share(activity, intent);
     }
 
@@ -176,7 +139,7 @@ public class InstagramManager {
      * Instagram share
      */
     private static void share(Activity activity, Intent intent) {
-        if (ExternalServiceUtils.checkInstalled(activity, INSTAGRAM_PACKAGE))
+        if (ExternalServiceUtils.checkInstalled(activity, WE_CHAT_PACKAGE))
             activity.startActivity(intent);
     }
 

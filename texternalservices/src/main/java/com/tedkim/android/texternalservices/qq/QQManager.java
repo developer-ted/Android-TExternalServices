@@ -1,7 +1,6 @@
-package com.tedkim.android.texternalservices.instagram;
+package com.tedkim.android.texternalservices.qq;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 
@@ -11,67 +10,23 @@ import com.tedkim.android.texternalservices.utils.ExternalServiceUtils;
 import java.io.File;
 
 /**
- * Instagram Manger
+ * Wechat Manger
  * Created by Ted
  */
 
-public class InstagramManager {
+public class QQManager {
 
-    private static final String INSTAGRAM_URL = "http://www.instagram.com/";
-    private static final String INSTAGRAM_PACKAGE = "com.instagram.android";
+    private static final String QQ_PACKAGE = "com.tencent.mobileqq";
 
     public static void openApp(Activity activity) {
-        if (ExternalServiceUtils.checkInstalled(activity, INSTAGRAM_PACKAGE)) {
+        if (ExternalServiceUtils.checkInstalled(activity, QQ_PACKAGE)) {
             Intent intent = new Intent(Intent.ACTION_SEND);
             intent.setType(ExternalServiceConfig.INTENT_TEXT_TYPE);
-            intent.putExtra(Intent.EXTRA_TEXT, " ");
-            intent.putExtra(Intent.EXTRA_SUBJECT, " ");
-            intent.setPackage(INSTAGRAM_PACKAGE);
+            intent.setPackage(QQ_PACKAGE);
             activity.startActivity(intent);
-
-
-//            Uri uri = Uri.parse("http://instagram.com/");
-//            Intent likeIng = new Intent(Intent.ACTION_VIEW, uri);
-//
-//            likeIng.setPackage("com.instagram.android");
-//
-//            try {
-//                activity.startActivity(likeIng);
-//            } catch (ActivityNotFoundException e) {
-//                activity.startActivity(new Intent(Intent.ACTION_VIEW,
-//                        Uri.parse("http://instagram.com/xxx")));
-//            }
-
-////            Intent intent = new Intent(Intent.ACTION_SEND);
-////            intent.setPackage(INSTAGRAM_PACKAGE);
-////            activity.startActivity(intent);
-//            Intent intent = new Intent(Intent.ACTION_VIEW);
-////            intent.setType(ExternalServiceConfig.INTENT_MAIN);
-////            intent.setPackage(INSTAGRAM_PACKAGE);
-//            intent.setData(Uri.parse("http://www.facebook.com"));
-//            activity.startActivity(intent);
         } else {
-
+//            activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(FACEBOOK_URL)));
         }
-    }
-
-    /**
-     * Check instagram app installed
-     *
-     * @param context context
-     * @return installed
-     */
-    public static boolean checkInstalledApp(Context context) {
-        return ExternalServiceUtils.checkInstalled(context, INSTAGRAM_PACKAGE);
-    }
-
-    /**
-     * Open instagram web site
-     *
-     * @param context context
-     */
-    public static void openWebSite(Context context) {
-        context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(INSTAGRAM_URL)));
     }
 
     // =============================================================================
@@ -82,14 +37,17 @@ public class InstagramManager {
      *
      * @param photoPath photo path
      */
-    public static void sharePhoto(Activity activity, String photoPath) {
+    public void sharePhoto(Activity activity, String photoPath) {
         File media = new File(photoPath);
         Uri uri = Uri.fromFile(media);
 
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType(ExternalServiceConfig.INTENT_IMAGE_TYPE);
         intent.putExtra(Intent.EXTRA_STREAM, uri);
-        intent.setPackage(INSTAGRAM_PACKAGE);
+        intent.putExtra(Intent.EXTRA_TITLE, "title");
+        intent.putExtra(Intent.EXTRA_SUBJECT, "subject");
+        intent.putExtra(Intent.EXTRA_TEXT, "text");
+        intent.setPackage(QQ_PACKAGE);
         share(activity, intent);
     }
 
@@ -98,13 +56,13 @@ public class InstagramManager {
      *
      * @param file photo file
      */
-    public static void sharePhoto(Activity activity, File file) {
+    public void sharePhoto(Activity activity, File file) {
         Uri uri = Uri.fromFile(file);
 
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType(ExternalServiceConfig.INTENT_IMAGE_TYPE);
         intent.putExtra(Intent.EXTRA_STREAM, uri);
-        intent.setPackage(INSTAGRAM_PACKAGE);
+        intent.setPackage(QQ_PACKAGE);
         share(activity, intent);
     }
 
@@ -113,11 +71,11 @@ public class InstagramManager {
      *
      * @param uri photo uri
      */
-    public static void sharePhoto(Activity activity, Uri uri) {
+    public void sharePhoto(Activity activity, Uri uri) {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType(ExternalServiceConfig.INTENT_IMAGE_TYPE);
         intent.putExtra(Intent.EXTRA_STREAM, uri);
-        intent.setPackage(INSTAGRAM_PACKAGE);
+        intent.setPackage(QQ_PACKAGE);
         share(activity, intent);
     }
 
@@ -129,14 +87,14 @@ public class InstagramManager {
      *
      * @param videoPath video path
      */
-    public static void shareVideo(Activity activity, String videoPath) {
+    public void shareVideo(Activity activity, String videoPath) {
         File media = new File(videoPath);
         Uri uri = Uri.fromFile(media);
 
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType(ExternalServiceConfig.INTENT_VIDEO_TYPE);
         intent.putExtra(Intent.EXTRA_STREAM, uri);
-        intent.setPackage(INSTAGRAM_PACKAGE);
+        intent.setPackage(QQ_PACKAGE);
         share(activity, intent);
     }
 
@@ -145,13 +103,13 @@ public class InstagramManager {
      *
      * @param file video file
      */
-    public static void shareVideo(Activity activity, File file) {
+    public void shareVideo(Activity activity, File file) {
         Uri uri = Uri.fromFile(file);
 
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType(ExternalServiceConfig.INTENT_VIDEO_TYPE);
         intent.putExtra(Intent.EXTRA_STREAM, uri);
-        intent.setPackage(INSTAGRAM_PACKAGE);
+        intent.setPackage(QQ_PACKAGE);
         share(activity, intent);
     }
 
@@ -160,11 +118,11 @@ public class InstagramManager {
      *
      * @param uri video uri
      */
-    public static void shareVideo(Activity activity, Uri uri) {
+    public void shareVideo(Activity activity, Uri uri) {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType(ExternalServiceConfig.INTENT_VIDEO_TYPE);
         intent.putExtra(Intent.EXTRA_STREAM, uri);
-        intent.setPackage(INSTAGRAM_PACKAGE);
+        intent.setPackage(QQ_PACKAGE);
         share(activity, intent);
     }
 
@@ -175,8 +133,8 @@ public class InstagramManager {
      * FIXME not installed check
      * Instagram share
      */
-    private static void share(Activity activity, Intent intent) {
-        if (ExternalServiceUtils.checkInstalled(activity, INSTAGRAM_PACKAGE))
+    private void share(Activity activity, Intent intent) {
+        if (ExternalServiceUtils.checkInstalled(activity, QQ_PACKAGE))
             activity.startActivity(intent);
     }
 

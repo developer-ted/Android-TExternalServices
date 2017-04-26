@@ -198,9 +198,9 @@ public class ShareManager {
             throw new NullPointerException("You must share method");
         } else {
             if (mDialogTitle == null)
-                throw new NullPointerException("You must setDialogTitle()");
-            else
-                mActivity.startActivity(Intent.createChooser(mIntent, mDialogTitle));
+                setDialogTitle("Share");
+
+            mActivity.startActivity(Intent.createChooser(mIntent, mDialogTitle));
         }
     }
 }

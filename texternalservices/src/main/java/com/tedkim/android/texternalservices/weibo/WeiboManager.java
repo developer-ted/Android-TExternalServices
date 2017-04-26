@@ -1,4 +1,4 @@
-package com.tedkim.android.texternalservices.instagram;
+package com.tedkim.android.texternalservices.weibo;
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,67 +11,39 @@ import com.tedkim.android.texternalservices.utils.ExternalServiceUtils;
 import java.io.File;
 
 /**
- * Instagram Manger
+ * Weibo Manger
  * Created by Ted
  */
 
-public class InstagramManager {
+public class WeiboManager {
 
-    private static final String INSTAGRAM_URL = "http://www.instagram.com/";
-    private static final String INSTAGRAM_PACKAGE = "com.instagram.android";
+    private static final String WEIBO_URL = "https://weibo.com/";
+    private static final String WEIBO_PACKAGE = "com.sina.weibo";
 
     public static void openApp(Activity activity) {
-        if (ExternalServiceUtils.checkInstalled(activity, INSTAGRAM_PACKAGE)) {
-            Intent intent = new Intent(Intent.ACTION_SEND);
-            intent.setType(ExternalServiceConfig.INTENT_TEXT_TYPE);
-            intent.putExtra(Intent.EXTRA_TEXT, " ");
-            intent.putExtra(Intent.EXTRA_SUBJECT, " ");
-            intent.setPackage(INSTAGRAM_PACKAGE);
-            activity.startActivity(intent);
-
-
-//            Uri uri = Uri.parse("http://instagram.com/");
-//            Intent likeIng = new Intent(Intent.ACTION_VIEW, uri);
-//
-//            likeIng.setPackage("com.instagram.android");
-//
-//            try {
-//                activity.startActivity(likeIng);
-//            } catch (ActivityNotFoundException e) {
-//                activity.startActivity(new Intent(Intent.ACTION_VIEW,
-//                        Uri.parse("http://instagram.com/xxx")));
-//            }
-
-////            Intent intent = new Intent(Intent.ACTION_SEND);
-////            intent.setPackage(INSTAGRAM_PACKAGE);
-////            activity.startActivity(intent);
-//            Intent intent = new Intent(Intent.ACTION_VIEW);
-////            intent.setType(ExternalServiceConfig.INTENT_MAIN);
-////            intent.setPackage(INSTAGRAM_PACKAGE);
-//            intent.setData(Uri.parse("http://www.facebook.com"));
-//            activity.startActivity(intent);
-        } else {
-
-        }
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType(ExternalServiceConfig.INTENT_TEXT_TYPE);
+        intent.setPackage(WEIBO_PACKAGE);
+        activity.startActivity(intent);
     }
 
     /**
-     * Check instagram app installed
+     * Check weibo app installed
      *
      * @param context context
      * @return installed
      */
     public static boolean checkInstalledApp(Context context) {
-        return ExternalServiceUtils.checkInstalled(context, INSTAGRAM_PACKAGE);
+        return ExternalServiceUtils.checkInstalled(context, WEIBO_PACKAGE);
     }
 
     /**
-     * Open instagram web site
+     * Open weibo web site
      *
      * @param context context
      */
     public static void openWebSite(Context context) {
-        context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(INSTAGRAM_URL)));
+        context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(WEIBO_URL)));
     }
 
     // =============================================================================
@@ -89,7 +61,9 @@ public class InstagramManager {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType(ExternalServiceConfig.INTENT_IMAGE_TYPE);
         intent.putExtra(Intent.EXTRA_STREAM, uri);
-        intent.setPackage(INSTAGRAM_PACKAGE);
+        intent.putExtra(Intent.EXTRA_TITLE, "title");
+        intent.putExtra(Intent.EXTRA_SUBJECT, "subject");
+        intent.setPackage(WEIBO_PACKAGE);
         share(activity, intent);
     }
 
@@ -104,7 +78,7 @@ public class InstagramManager {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType(ExternalServiceConfig.INTENT_IMAGE_TYPE);
         intent.putExtra(Intent.EXTRA_STREAM, uri);
-        intent.setPackage(INSTAGRAM_PACKAGE);
+        intent.setPackage(WEIBO_PACKAGE);
         share(activity, intent);
     }
 
@@ -117,7 +91,56 @@ public class InstagramManager {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType(ExternalServiceConfig.INTENT_IMAGE_TYPE);
         intent.putExtra(Intent.EXTRA_STREAM, uri);
-        intent.setPackage(INSTAGRAM_PACKAGE);
+        intent.setPackage(WEIBO_PACKAGE);
+        share(activity, intent);
+    }
+    // =============================================================================
+    // Photo share
+    // =============================================================================
+    /**
+     * Share photo using photo path with message
+     *
+     * @param photoPath photo path
+     */
+    public static void sharePhotoMessage(Activity activity, String photoPath, String message) {
+        File media = new File(photoPath);
+        Uri uri = Uri.fromFile(media);
+
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType(ExternalServiceConfig.INTENT_IMAGE_TYPE);
+        intent.putExtra(Intent.EXTRA_STREAM, uri);
+        intent.putExtra(Intent.EXTRA_TEXT, message);
+        intent.setPackage(WEIBO_PACKAGE);
+        share(activity, intent);
+    }
+
+    /**
+     * Share photo using file with message
+     *
+     * @param file photo file
+     */
+    public static void sharePhoto(Activity activity, File file, String message) {
+        Uri uri = Uri.fromFile(file);
+
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType(ExternalServiceConfig.INTENT_IMAGE_TYPE);
+        intent.putExtra(Intent.EXTRA_STREAM, uri);
+        intent.putExtra(Intent.EXTRA_TEXT, message);
+        intent.setPackage(WEIBO_PACKAGE);
+        share(activity, intent);
+    }
+
+    /**
+     * Share photo using uri with message
+     *
+     * @param uri photo uri
+     */
+    public static void sharePhoto(Activity activity, Uri uri, String message) {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType(ExternalServiceConfig.INTENT_IMAGE_TYPE);
+        intent.putExtra(Intent.EXTRA_STREAM, uri);
+        intent.putExtra(Intent.EXTRA_TEXT, message);
+        intent.setPackage(WEIBO_PACKAGE);
         share(activity, intent);
     }
 
@@ -136,7 +159,7 @@ public class InstagramManager {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType(ExternalServiceConfig.INTENT_VIDEO_TYPE);
         intent.putExtra(Intent.EXTRA_STREAM, uri);
-        intent.setPackage(INSTAGRAM_PACKAGE);
+        intent.setPackage(WEIBO_PACKAGE);
         share(activity, intent);
     }
 
@@ -151,7 +174,7 @@ public class InstagramManager {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType(ExternalServiceConfig.INTENT_VIDEO_TYPE);
         intent.putExtra(Intent.EXTRA_STREAM, uri);
-        intent.setPackage(INSTAGRAM_PACKAGE);
+        intent.setPackage(WEIBO_PACKAGE);
         share(activity, intent);
     }
 
@@ -164,7 +187,7 @@ public class InstagramManager {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType(ExternalServiceConfig.INTENT_VIDEO_TYPE);
         intent.putExtra(Intent.EXTRA_STREAM, uri);
-        intent.setPackage(INSTAGRAM_PACKAGE);
+        intent.setPackage(WEIBO_PACKAGE);
         share(activity, intent);
     }
 
@@ -176,7 +199,7 @@ public class InstagramManager {
      * Instagram share
      */
     private static void share(Activity activity, Intent intent) {
-        if (ExternalServiceUtils.checkInstalled(activity, INSTAGRAM_PACKAGE))
+        if (ExternalServiceUtils.checkInstalled(activity, WEIBO_PACKAGE))
             activity.startActivity(intent);
     }
 

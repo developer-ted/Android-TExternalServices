@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.util.Log;
 
+import com.facebook.share.model.ShareHashtag;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.model.SharePhoto;
 import com.facebook.share.model.SharePhotoContent;
@@ -23,6 +24,7 @@ import java.io.File;
  */
 public class FacebookManager {
 
+    private static final String FACEBOOK_URL = "https://www.facebook.com";
     private static final String FACEBOOK_PACKAGE = "com.facebook.katana";
     private static final String TAG = FacebookManager.class.getSimpleName();
 
@@ -36,6 +38,32 @@ public class FacebookManager {
             mInstance = new FacebookManager();
         mInstance.mContext = context;
         return mInstance;
+    }
+
+    public static void openApp(Activity activity) {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType(ExternalServiceConfig.INTENT_TEXT_TYPE);
+        intent.setPackage(FACEBOOK_PACKAGE);
+        activity.startActivity(intent);
+    }
+
+    /**
+     * Check facebook app installed
+     *
+     * @param context context
+     * @return installed
+     */
+    public static boolean checkInstalledApp(Context context) {
+        return ExternalServiceUtils.checkInstalled(context, FACEBOOK_PACKAGE);
+    }
+
+    /**
+     * Open facebook web site
+     *
+     * @param context context
+     */
+    public static void openWebSite(Context context) {
+        context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(FACEBOOK_URL)));
     }
 
     /**
@@ -107,6 +135,7 @@ public class FacebookManager {
     // =============================================================================
     // Share Link
     // =============================================================================
+
     /**
      * Facebook share url
      *
@@ -165,6 +194,29 @@ public class FacebookManager {
 //                    .setShareHashtag(new ShareHashtag.Builder()
 //                            .setHashtag("#Charis #HICHARIS")
 //                            .build())
+                    .build();
+            ShareDialog.show(activity, content);
+        }
+    }
+
+    /**
+     * Facebook share photo using bitmap image with hash tag
+     *
+     * @param activity activity
+     * @param bitmap   bitmap
+     * @param hashTag  Hash Tag
+     */
+    public static void sharePhoto(Activity activity, Bitmap bitmap, String hashTag) {
+        if (ExternalServiceUtils.checkInstalled(activity, FACEBOOK_PACKAGE)) {
+            SharePhoto photo = new SharePhoto.Builder()
+                    .setBitmap(bitmap)
+                    .setBitmap(bitmap)
+                    .build();
+            SharePhotoContent content = new SharePhotoContent.Builder()
+                    .addPhoto(photo)
+                    .setShareHashtag(new ShareHashtag.Builder()
+                            .setHashtag(hashTag)
+                            .build())
                     .build();
             ShareDialog.show(activity, content);
         }
