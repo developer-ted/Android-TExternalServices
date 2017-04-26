@@ -1,12 +1,10 @@
 <resources>
 
-    <string name="app_name" translatable="false">SNACKK HOLE</string>
+    <string name="app_name">CharisCommerce</string>
 
-    <!--celeb : 994701673911930-->
-    <!--snackk : 1450286355217980-->
     <!-- API KEY -->
-    <string name="facebook_app_id" translatable="false">994701673911930</string>
+    <string name="facebook_app_id">1714977395493810</string>
 
-    <string name="intent_action" translatable="false">com.tedkim.android.texternalservices</string>
+    <string name="intent_action">com.tedkim.android.texternalservices</string>
 
 </resources>

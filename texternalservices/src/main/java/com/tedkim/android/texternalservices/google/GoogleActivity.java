@@ -258,6 +258,7 @@ public class GoogleActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         Log.d(TAG, "onActivityResult");
+        Log.e(TAG, "onActivityResult: data :" + data.getDataString());
         Log.d(TAG, "- requestCode = " + requestCode + "/ resultCode = " + resultCode);
 
         switch (requestCode) {
@@ -276,6 +277,9 @@ public class GoogleActivity extends AppCompatActivity {
     private void handleSignInResult(GoogleSignInResult result) {
         if (result != null) {
             Log.d(TAG, "[handleSignInResult] result : " + result.isSuccess());
+            Log.e(TAG, "handleSignInResult: result :"+ result.getStatus());
+            Log.e(TAG, "handleSignInResult: result :"+ result.getSignInAccount());
+            Log.d(TAG, "handleSignInResult() called with: result = [" + result + "]");
             if (result.isSuccess()) {
                 new GetTokenTask(result.getSignInAccount().getEmail()).execute();
             } else {
@@ -303,6 +307,7 @@ public class GoogleActivity extends AppCompatActivity {
             try {
                 android.accounts.Account account = new android.accounts.Account(accountName, GoogleAuthUtil.GOOGLE_ACCOUNT_TYPE);
                 String scopes = "oauth2:" + "https://www.googleapis.com/auth/plus.login";
+                Log.d(TAG, "doInBackground: accout"+account.describeContents());
                 return GoogleAuthUtil.getToken(GoogleActivity.this, account, scopes);
             } catch (UserRecoverableAuthException userAuthEx) {
                 startActivityForResult(userAuthEx.getIntent(), REQUEST_CODE_GOOGLE_SIGN_IN);
