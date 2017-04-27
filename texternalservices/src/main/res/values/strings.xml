@@ -2,9 +2,6 @@
 
     <string name="app_name">CharisCommerce</string>
 
-    <!-- API KEY -->
-    <string name="facebook_app_id">1714977395493810</string>
-
     <string name="intent_action">com.tedkim.android.texternalservices</string>
 
 </resources>
