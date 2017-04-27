@@ -13,7 +13,7 @@ import com.facebook.share.model.SharePhoto;
 import com.facebook.share.model.SharePhotoContent;
 import com.facebook.share.widget.ShareDialog;
 import com.tedkim.android.texternalservices.config.ExternalServiceConfig;
-import com.tedkim.android.texternalservices.interfaces.OnSnsLoginListener;
+import com.tedkim.android.texternalservices.interfaces.OnSNSLoginListener;
 import com.tedkim.android.texternalservices.utils.ExternalServiceUtils;
 
 import java.io.File;
@@ -31,7 +31,7 @@ public class FacebookManager {
     private static FacebookManager mInstance;
     private Context mContext;
 
-    private OnSnsLoginListener mOnSnsLoginListener;
+    private OnSNSLoginListener mOnSnsLoginListener;
 
     public static FacebookManager getInstance(Context context) {
         if (mInstance == null)
@@ -72,7 +72,7 @@ public class FacebookManager {
      * @param listener OnSnsLoginListener
      * @return FacebookManager
      */
-    public FacebookManager setListener(OnSnsLoginListener listener) {
+    public FacebookManager setListener(OnSNSLoginListener listener) {
         this.mOnSnsLoginListener = listener;
         return this;
     }

@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.tedkim.android.texternalservices.config.ExternalServiceConfig;
-import com.tedkim.android.texternalservices.interfaces.OnSnsLoginListener;
+import com.tedkim.android.texternalservices.interfaces.OnSNSLoginListener;
 
 /**
  * Created by Ted
@@ -19,7 +19,7 @@ public class GoogleManager {
     private static GoogleManager mInstance;
     private Context mContext;
 
-    private OnSnsLoginListener mOnSnsLoginListener;
+    private OnSNSLoginListener mOnSnsLoginListener;
 
     public static GoogleManager getInstance(Context context) {
         if (mInstance == null)
@@ -34,7 +34,7 @@ public class GoogleManager {
      * @param listener OnSnsLoginListener
      * @return GoogleManager
      */
-    public GoogleManager setListener(OnSnsLoginListener listener) {
+    public GoogleManager setListener(OnSNSLoginListener listener) {
         this.mOnSnsLoginListener = listener;
         return this;
     }
