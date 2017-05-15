@@ -17,11 +17,6 @@
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
-        <!--<provider-->
-            <!--android:name="com.facebook.FacebookContentProvider"-->
-            <!--android:authorities="com.facebook.app.FacebookContentProvider994701673911930"-->
-            <!--android:exported="true" />-->
-
         <!--Broadcast-->
         <activity
             android:name=".facebook.FacebookActivity"
